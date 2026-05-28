@@ -68,6 +68,28 @@ public sealed class SerialPortManager : IDisposable
         }
     }
 
+    public void SendTriggerCommand()
+    {
+        Send([0x4C, 0x4F, 0x4E, 0x0D], "LON");
+    }
+
+    public void SendStopCommand()
+    {
+        Send([0x4C, 0x4F, 0x46, 0x46, 0x0D], "LOFF");
+    }
+
+    private void Send(byte[] command, string name)
+    {
+        if (_serialPort?.IsOpen != true)
+        {
+            throw new InvalidOperationException("扫码枪串口未打开。");
+        }
+
+        _serialPort.Write(command, 0, command.Length);
+        _logger.Info($"已发送霍尼韦尔扫码指令：{name}");
+    }
+
+
     private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
     {
         try

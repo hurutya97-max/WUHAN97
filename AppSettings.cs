@@ -51,6 +51,12 @@ public sealed class PlcSettings
     public byte UnitId { get; set; } = 1;
     public string AlarmRegister { get; set; } = "D3000";
     public ushort AlarmValue { get; set; } = 1;
+    public string ScanTriggerRegister { get; set; } = "D50";
+    public string ScanResultRegister { get; set; } = "D51";
+    public string PortIdRegister { get; set; } = "D52";
+    public string RescanCoil { get; set; } = "M838";
+    public string ManualUploadCoil { get; set; } = "M839";
+    public string SkipCoil { get; set; } = "M835";
 }
 
 public sealed class EapSettings
